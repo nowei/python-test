@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<style> 
+path {
+  fill: none;
+  stroke: #878747;
+  stroke-width: 5px;
+}
+<html>
+<body>
+</style>
+<title>Hello from Flask</title>
+{% if name %}
+  <h1>Hello {{ name }}!</h1>
+{% else %}
+  <h2>Hello, World!</h2>
+{% endif %}
+<!-- load the d3.js library -->    
+
+<div id="svgcontainer">
+<script>
+  var width = 600;
+  var height = 200;
+  var svg = d3.select("#svgcontainer")
+              .append("svg")
+              .attr("width", width)
+              .attr("height", height);
+  var initialX = 40;
+  var startX = initialX;
+  var startY = 100;
+  var message = svg.append("circle")
+                   .attr("cx", initialX)
+                   .attr("cy", startY)
+                   .attr("r", 10)
+                   .attr("fill", "green")
+                   .style("stroke", "black")
+                   .style("stroke-width", 2);
+  var innerRadius = 30, 
+      outerRadius = 40, 
+      radius = (innerRadius + outerRadius) / 2;
+
+  var arc = d3.arc()
+              .innerRadius(innerRadius)
+              .outerRadius(outerRadius)
+              .startAngle(0)
+              .endAngle(0);
+
+  var node1 = svg.append("circle")
+                 .attr("cx", initialX)
+                 .attr("cy", startY)
+                 .attr("r", 30)
+                 .attr("fill", "green")
+                 .style("stroke", "black")
+                 .style("stroke-width", 3);
+  var path1 = svg.append("path")
+                 .attr("d", arc)
+                 .attr("fill", "red")
+                 .attr("transform", "translate("+initialX+","+startY+")");
+  var node2 = svg.append("circle")
+                 .attr("cx", 560)
+                 .attr("cy", startY)
+                 .attr("r", 30)
+                 .attr("fill", "green")
+                 .style("stroke", "black")
+                 .style("stroke-width", 3);
+  var speed = 1;
+  function updateSpeed() {
+    if (startX < 560)
+    {
+      message.attr("cx",startX);
+      startX += speed;
+    } else {
+      startX = initialX;
+      if (Math.random() < 0.5) {
+        speed = 1;
+      } else {
+        speed = 2;
+      }
+    }
+  }
+  var angle = -Math.PI / 2;
+  console.log(path1)
+  function updateArc() {
+    // arc1.each(function(d) { d.previous = d.value, d.value = d.update(now); });    
+    // arc1.transition()
+    //     .attrTween("d", arcTween);
+    if (angle > 3 * Math.PI / 2) {
+      angle = - Math.PI / 2;
+      // console.log("RESETTINGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
+    }
+    path1.attr("d", calculateArc([initialX, startY], angle));
+    angle += 0.01;
+  }
+  function calculateArc(startPos, endAngle) {
+    // var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    // console.log(startPos);
+    // console.log(Math.cos(0));
+    // console.log(startPos[0] + radius * Math.cos(endAngle));
+    // path.setAttribute('d', ['M',
+    // console.log(Math.abs(endAngle) < Math.PI / 2, " at ", endAngle * 180 / Math.PI);
+    return ['M',
+            0,
+            0 - radius,
+            'A',
+            radius,
+            radius,
+            0,
+            Math.abs(endAngle) < Math.PI / 2 ? 0 : 1, // 1 is long arc
+            1, // clockwise
+            radius * Math.cos(endAngle),
+            radius * Math.sin(endAngle),
+            ''].join(' ');
+    // return path;
+  }
+  function animate() {
+    updateSpeed();
+    updateArc();
+  }
+  setInterval(animate, 10);
+  animate();
+</script> 
+</div>
+</body>
+</html>

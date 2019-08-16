@@ -27,44 +27,56 @@ def findKth(a, b, k):
     if (aVal > bVal):
         # numbers we know for sure are less than aVal 
         # [everything up to aVal and everything up to and including bVal]
-        valsBeforeMax = len(a[0:len(a) // 2]) + len(b[0:len(b) // 2 + 1])
+        # a[0:len(a) // 2] and b[0:len(b) // 2 + 1]
+        valsBeforeMax = (len(a) // 2) + (len(b) // 2 + 1)
 
         # numbers we know for sure are more than bVal
         # [everything after and including aVal and everything after bVal]
-        valsAfterMin = len(a[len(a) // 2:len(a)]) + len(b[len(b) // 2 + 1:len(b)])
+        valsAfterMin = (len(a) - len(a) // 2) + (len(b) - (len(b) // 2 + 1))
 
         if (DEBUG): print('max = aVal, valsBeforeMax = {}, valsAfterMin = {}'.format(valsBeforeMax, valsAfterMin))
+
+        # Essentially trim based on what we know about k and its relationship to 
+        # a and b.
         if (k <= valsBeforeMax):
-            # kth largest is somewhere before median of a [max median] or somewhere in b
-            # Note: can only rule out in a because things in b later on might be k, but we know
-            # nothing after median of a can be the kth smallest because it must be the case that
-            # it is in valsBeforeMax. Otherwise 
-            return findKth(a[0:len(a) // 2], b[0:len(b)], k)
+            # kth smallest is somewhere before median of a [max median] or somewhere in b
+            # Note: can only rule out in a because things in b later on might be k, 
+            
+            # We know nothing after median of a can be the kth smallest because 
+            # there at least k values less than the max median, so everything after 
+            # it is irrelevant
+
+            # that are smaller than 
+            # two cases arise:
+            # 1. k is in a, so it is before 
+            # 2. k is in b, so 
+            return findKth(a[0:len(a) // 2], b, k)
         else: # k > valsBeforeMax
             # m + n - k <= valsAfterMin
-            # m + n - kth smallest is somewhere in a or after median of b [min median]
-            # kth largest = (m + n - k)th smallest
+            # m + n - kth largest is somewhere in a or after median of b [min median]
+            # kth smallest = (m + n - k)th largest
             # 
-            # can get rid of everything after the median in b because 
-            # (m + n - k)th smallest number because everything before
-            # b must be smaller than the median of a
+            # can get rid of everything before the median in b because to find 
+            # the (m + n - k)th largest number, there are at least (m + n - k)
+            # values larger than the minimum value, so the (m + n - k)th largest
+            # value must be within that portion.
 
             # k is somewhere after median of b or somewhere in a
-            return findKth(a[0:len(a)], b[len(b) // 2 + 1:len(b)], k - (len(b) // 2 + 1))
+            return findKth(a, b[len(b) // 2 + 1:len(b)], k - (len(b) // 2 + 1))
     else: # aVal < bVal
         # inclusive of median of a because it is before max, but we are not sure if what's
         # after is over max
-        valsBeforeMax = len(a[0:len(a) // 2 + 1]) + len(b[0:len(b) // 2])
-        valsAfterMin = len(a[len(a) // 2 + 1:len(a)]) + len(b[len(b) // 2:len(b)])
+        valsBeforeMax = (len(a) // 2 + 1) + (len(b) // 2)
+        valsAfterMin = (len(a) - (len(a) // 2 + 1)) + (len(b) - len(b) // 2)
         if (DEBUG): print('max = bVal, valsBeforeMax = {}, valsAfterMin = {}'.format(valsBeforeMax, valsAfterMin))
 
 
         if (k <= valsBeforeMax):
-            # kth largest is somewhere before median of b [max median] or somewhere in a
-            return findKth(a[0:len(a)], b[0:len(b) // 2], k)
+            # kth smallest is somewhere before median of b [max median] or somewhere in a
+            return findKth(a, b[0:len(b) // 2], k)
         else:
-            # kth largest is somewhere after median of a [min median] or somewhere in b
-            return findKth(a[len(a) // 2 + 1:len(a)], b[0:len(b)], k - (len(a) // 2 + 1))
+            # kth smallest is somewhere after median of a [min median] or somewhere in b
+            return findKth(a[len(a) // 2 + 1:len(a)], b, k - (len(a) // 2 + 1))
 
 import random
 # TODO: Test random generation with set vs randomly picking

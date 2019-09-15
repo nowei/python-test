@@ -1,0 +1,69 @@
+with garbage collection
+declared inside (100000 loops): 36.48528720000013
+declared outside (100000 loops): 40.20389290000003
+without garbage collection
+declared inside (100000 loops): 35.977203100000224
+declared outside (100000 loops): 37.39729100000022
+
+with garbage collection
+declared inside (100000 loops): 38.264989700000115
+declared outside (100000 loops): 36.6842314000005
+without garbage collection
+declared inside (100000 loops): 64.98825060000036
+declared outside (100000 loops): 78.76936120000028
+
+with garbage collection
+declared inside (100000 loops): 51.02608869999949
+declared outside (100000 loops): 51.95334970000022
+without garbage collection
+declared inside (100000 loops): 48.22189199999957
+declared outside (100000 loops): 50.76083489999928
+
+with garbage collection
+declared inside (100000 loops): 50.12933129999965
+declared outside (100000 loops): 48.82530200000019
+without garbage collection
+declared inside (100000 loops): 51.074011799999425
+declared outside (100000 loops): 41.461028599999736
+
+with garbage collection
+declared inside (100000 loops): 39.92353769999954
+declared outside (100000 loops): 41.10976860000028
+without garbage collection
+declared inside (100000 loops): 40.80480029999944
+declared outside (100000 loops): 38.277871700000105
+
+with garbage collection
+declared inside (100000 loops): 45.378077599999415
+declared outside (100000 loops): 39.821533700000145
+without garbage collection
+declared inside (100000 loops): 41.078055800000584
+declared outside (100000 loops): 40.33240990000013
+
+with garbage collection
+declared inside (100000 loops): 42.13520499999959
+declared outside (100000 loops): 42.47167780000018
+without garbage collection
+declared inside (100000 loops): 45.808234000000084
+declared outside (100000 loops): 44.327736399998685
+
+with garbage collection
+declared inside (100000 loops): 45.761178499999005
+declared outside (100000 loops): 40.200026599999546
+without garbage collection
+declared inside (100000 loops): 40.28995440000108
+declared outside (100000 loops): 44.338328400001046
+
+with garbage collection
+declared inside (100000 loops): 43.99683180000102
+declared outside (100000 loops): 44.79749830000037
+without garbage collection
+declared inside (100000 loops): 46.92561830000159
+declared outside (100000 loops): 50.443007199999556
+
+with garbage collection
+declared inside (100000 loops): 40.73638629999914
+declared outside (100000 loops): 40.08961149999959
+without garbage collection
+declared inside (100000 loops): 42.22608450000007
+declared outside (100000 loops): 44.151939699999275
